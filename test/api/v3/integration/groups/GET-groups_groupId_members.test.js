@@ -73,7 +73,7 @@ describe('GET /groups/:groupId/members', () => {
     expect(res[0].profile).to.have.all.keys(['name']);
   });
 
-  it('populates all public fields if req.query.includeAllPublicFields === true and it is a party', async () => {
+  it.only('populates all public fields if req.query.includeAllPublicFields === true and it is a party', async () => {
     await generateGroup(user, {type: 'party', name: generateUUID()});
     let [memberRes] = await user.get('/groups/party/members?includeAllPublicFields=true');
 

@@ -1,5 +1,7 @@
 import mongoose from 'mongoose';
 
+mongoose.set('debug', true);
+
 import schema from './schema';
 
 require('./hooks');

@@ -143,6 +143,9 @@ function _getMembersForItem (type) {
       .select(fields)
       .exec();
 
+    console.log('Fields:', fields);
+    console.log('members[0].preferences (note that preferences.sleep is not included)', members[0].preferences);
+
     // manually call toJSON with minimize: true so empty paths aren't returned
     let membersToJSON = members.map(member => {
       let memberToJSON = member.toJSON({minimize: true});
