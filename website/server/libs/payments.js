@@ -151,6 +151,8 @@ api.createSubscription = async function createSubscription (data) {
     }
 
     if (data.gift.member._id !== data.user._id) { // Only send push notifications if sending to a user other than yourself
+      message = shared.i18n.t('giftPromoReward', {months});
+      data.user.sendMessage(data.user, message);
       if (data.gift.member.preferences.pushNotifications.giftedSubscription !== false) {
         sendPushNotification(data.gift.member,
           {

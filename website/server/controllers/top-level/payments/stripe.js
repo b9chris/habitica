@@ -106,6 +106,11 @@ api.checkout = {
         gift.member = member;
         if (gift.type === 'subscription') method = 'createSubscription';
         data.paymentMethod = 'Gift';
+        if (data.user._id !== gift.member._id) {
+          let rewardData = data;
+          rewardData.gift.member = user;
+          await payments[method](rewardData);
+        }
       }
 
       await payments[method](data);

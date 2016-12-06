@@ -141,6 +141,11 @@ api.checkoutSuccess = {
 
       data.paymentMethod = 'Gift';
       data.gift = gift;
+      if (data.user._id !== gift.member._id) {
+        let rewardData = data;
+        rewardData.gift.member = data.user;
+        await payments[method](rewardData);
+      }
     }
 
     await paypalPaymentExecute(paymentId, { payer_id: customerId });
