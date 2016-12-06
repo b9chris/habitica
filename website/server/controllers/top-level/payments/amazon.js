@@ -141,14 +141,16 @@ api.checkout = {
     };
 
     if (gift) {
-      if (gift.type === 'subscription') method = 'createSubscription';
       gift.member = await User.findById(gift ? gift.uuid : undefined);
       data.gift = gift;
       data.paymentMethod = 'Gift';
-      if (data.user._id !== gift.member._id) {
-        let rewardData = data;
-        rewardData.gift.member = user;
-        await payments[method](rewardData);
+      if (gift.type === 'subscription') {
+        method = 'createSubscription';
+        if (data.user._id !== gift.member._id) {
+          let rewardData = data;
+          rewardData.gift.member = user;
+          await payments[method](rewardData);
+        }
       }
     }
 
